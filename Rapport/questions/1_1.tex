@@ -1,1 +1,58 @@
-1.2: les données convergent vers (mettre la matrice pour les deux cas)
+\paragraph{}
+Rappelons d'abord brievement ce qu'est une chaîne de Markov. Une chaîne de Markov est un outil mathématique stochastique, qui utilise un principe de "non-mémoire". 
+Tout état d'un système est simplement calculé à partir du précédent, ce qui en facilite l'analyse.
+\\\\
+Ces chaînes sont simplement décrites mathématiquement comme suit avec $X_1, X_2,..., X_t$ une suite de variables aléatoires qui définit une chaîne de Markov
+si (pour t > 1) elle suit cette relation :
+\begin{equation*}
+  \mathbb{P}(X_1, X_2, ..., X_t) = \mathbb{P}(X_1)\prod_{l = 2}^{t}\mathbb{P}(X_l | X_{l-1}) 
+\end{equation*}
+
+\subsubsection{}
+
+Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs demandées, ici avec $t = 20$ (suffit pour avoir convergé) :
+\begin{itemize}
+  \item Cas de base distribué uniformément : $\mathbb{P}(X_t = x) = 
+  \begin{pmatrix}
+    0.3488 & 0.0698 & 0.2326 & 0.3488\\
+  \end{pmatrix}$ avec $x = 1, 2, 3, 4$
+  \item Cas de base fixé : $\mathbb{P}(X_t = x) = 
+  \begin{pmatrix}
+    0.3488 & 0.0698 & 0.2326 & 0.3488\\
+  \end{pmatrix}$ avec $x = 1, 2, 3, 4$
+  \item $Q^t = 
+  \begin{pmatrix}
+  0.3488 & 0.0698 & 0.2325 & 0.3488\\
+  0.3488 & 0.0698 & 0.2326 & 0.3488\\
+  0.3488 & 0.0698 & 0.2326 & 0.3488\\
+  0.3488 & 0.0698 & 0.2326 & 0.3488\\
+  \end{pmatrix}$ 
+\end{itemize}
+
+On remarque donc bien une convergence vers des probabilités et ceci peut importe le cas de départ, on peut montrer cette convergence sur les figures ci-dessous :
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/evo_unif.png}
+  \caption{Évolution des probabilités dans une distribution de départ uniforme}
+\end{figure}
+\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/evo_fixed.png}
+  \caption{Évolution des probabilités dans une distribution de départ fixée sur 3}
+\end{figure}
+
+\subsubsection{}
+
+Afin de déduire la distribution stationnaire $\pi_{\infty}$ de notre chaîne qui est décrite comme suit :
+\begin{equation*}
+  [\pi_\infty]_j = \lim_{t \rightarrow \infty} \mathbb{P}(X_t = j)
+\end{equation*}
+
+Nous allons simplement calculer $\mathbb{P}(X_t)$ avec un grand $t$ ce qui nous donne :
+\begin{equation*}
+  \pi_{\infty} = 
+  \begin{pmatrix}
+    0.3488 & 0.0698 & 0.2326 & 0.3488
+  \end{pmatrix}
+\end{equation*}
