@@ -1,5 +1,7 @@
+from os import system
 import numpy as np
 import matplotlib.pyplot as plt
+
 print("Question 1 : Chaînes de Markov")
 
 print("\n### Q1 ###")
@@ -27,6 +29,7 @@ for i in range(time_limit):
   p_1_temp = np.matmul(p_1_temp,Q)
   p_2_temp = np.matmul(p_1_temp,Q)
 
+plt.figure()
 plt.plot(P_1[0,:])
 plt.plot(P_1[1,:])
 plt.plot(P_1[2,:])
@@ -35,8 +38,10 @@ plt.title("Évolution de la probabilité de P(X_t = x) dans un cas de base unifo
 plt.legend(["P(X_t = 1)","P(X_t = 2)","P(X_t = 3)","P(X_t = 4)"])
 plt.xlabel("t")
 plt.ylabel("Probability")
+plt.savefig("Rapport/figs/evo_unif.svg")
 plt.show()
 
+plt.figure()
 plt.plot(P_2[0,:])
 plt.plot(P_2[1,:])
 plt.plot(P_2[2,:])
@@ -45,6 +50,7 @@ plt.title("Évolution de la probabilité de P(X_t = x) dans un cas de base fixé
 plt.legend(["P(X_t = 1)","P(X_t = 2)","P(X_t = 3)","P(X_t = 4)"])
 plt.xlabel("t")
 plt.ylabel("Probability")
+plt.savefig("Rapport/figs/evo_fixed.svg")
 plt.show()
 
 print("\nUniformly distributed case :")

@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\usepackage{graphicx}
+
+\usepackage{bbold}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+
+\usepackage{fancyhdr}
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{tcolorbox}
+\usepackage{fancyvrb}
+\usepackage{scrextend}
+
+\makeatletter
+
+\makeatother
+
+\begin{document}
+
+% ==============================================================================
+
+\title{Projet Geurts 2022}								% Title
+\author{Maxime FIRRINCIELI, Romain LAMBERMONT, Arthur LOUIS}								% Author
+\date{\today}											% Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{titlepage}
+ \centering
+ \vspace*{0.5 cm}
+ \includegraphics[scale = 0.7]{figs/facsa.png}\\[1.0 cm]	% University Logo
+ \textsc{\LARGE \newline\newline Faculté des Sciences appliquées}\\[2.0 cm]	% University Name
+ \textsc{\Large MATH0488-1 Éléments de Processus Stochastiques}\\[0.5 cm]				% Course Code
+ \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+ {\huge \bfseries Méthodes de Monte Carlo par chaînes de Markov pour la détection de communautés dans un graphe}\\
+ \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+
+ \begin{minipage}{0.5\textwidth}
+ 	\begin{flushleft} \large
+ 		\emph{Professeur :}\\
+ 		  Pierre GEURTS\\
+    \vspace{0.5cm}
+ 		\end{flushleft}
+ 		\end{minipage}~
+ 		\begin{minipage}{0.4\textwidth}
+
+ 		\begin{flushright} \large
+ 		\emph{Groupe :} \\
+      Maxime FIRRINCIELI\\
+      Romain LAMBERMONT\\
+      Arthur LOUIS\\
+ 	\end{flushright}
+
+ \end{minipage}\\[2 cm]
+
+
+ \thedate
+\end{titlepage}
+
+% ==============================================================================
+\thispagestyle{empty}
+\tableofcontents
+\pagebreak
+\setcounter{page}{1}
+
+\section{Première partie : chaînes de Markov et algorithme MCMC}
+
+\subsection{Chaînes de Markov}
+\input{questions/1_1}
+
+\subsection{Méthode MCMC : analyse théorique dans le cas fini}
+\input{questions/1_2}
+
+\subsection{Méthode MCMC : illustration sur un exemple simple}
+\input{questions/1_3}
+
+\section{Deuxième partie : détection de communautés dans un graphe par algorithmes MCMC}
+
+\subsection{Etude théorique}
+\input{questions/2_1}
+
+\subsection{Analyse expérimentale}
+\input{questions/2_2}
+
+\subsection{Application à un grand graphe}
+\end{document}
