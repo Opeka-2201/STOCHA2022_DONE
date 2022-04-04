@@ -90,7 +90,6 @@ def nextState(p):
     elif p[2] < rand < p[3]:
         return 4
 
-
 def makeRealisation(x0, T):
     real = list()
     real.append(x0)
@@ -98,14 +97,12 @@ def makeRealisation(x0, T):
         real.append(nextState(Q[real[-1]-1]))
     return real
 
-
 def numberOfOccurences(real):
     occurence = np.zeros(4)
     for i in real:
         occurence[i - 1] += 1
     return occurence / len(real)
 
-
-mk = makeRealisation(nextState([0.25,0.25,0.25,0.25]),10)
-print(mk)
-print(numberOfOccurences(mk))
+for nb_real in [100,1000,1000,10000,100000]:
+  mk = makeRealisation(nextState([0.25,0.25,0.25,0.25]),nb_real)
+  print(numberOfOccurences(mk))
