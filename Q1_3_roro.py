@@ -1,5 +1,6 @@
 import numpy as np
 from sympy import false, true
+import matplotlib as plt
 
 K = 10
 p = 0.3
@@ -49,12 +50,16 @@ def mhNextStep(x0):
     return x1, a
 
 
-def mhAll(x0):
+def mhAll(x_start):
     result = list()
-    result.append((x0, true))
+    result.append((x_start, true))
     conv = true
     while not conv:
         result.append(mhNextStep(x0))
         x0 = result[-1][0]
         conv = convCheck()
     return result
+
+
+x_start = 0
+result = mhAll(x_start)
