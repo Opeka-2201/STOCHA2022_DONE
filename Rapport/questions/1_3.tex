@@ -1,4 +1,22 @@
+Nous allons maintenant nous attarder à un cas plus précis de l'algorithme de Metropolis-Hastings pour échantilloner des valeurs suivant la 
+distribution binomiale définie comme suit avec $p$ la probabilité de succès :
+\begin{equation*}
+  \mathbb{P}(X = k) = C_K^k p^k(1-p)^{K-k}
+\end{equation*}
+Pour ce faire nous allons utiliser la distribution de proposition énoncée avec \(r \in \left] 0, 1\right[\) comme suit :
+\begin{equation*}
+  q(y|x) = 
+  \begin{cases}
+    \hfil r & \text{si } x = 0 \text{ et } y = 0\\
+    \hfil (1-r) &  \text{si } x = K \text{ et } y = K\\
+    \hfil r & \text{si } 0 < x \leq K \text{ et } y = x - 1\\
+    \hfil (1-r) & \text{si } 0 \leq x < K \text{ et } y = x + 1\\
+    \hfil 0 & \text{sinon}
+  \end{cases}
+\end{equation*}
+
 \subsubsection{}
+
 
 \subsubsection{}
 

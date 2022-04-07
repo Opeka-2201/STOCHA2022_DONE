@@ -77,7 +77,6 @@ print("2e condition", np.matmul(p_2, Q_inf))
 print("\n### Q1_3 ###")
 p = np.cumsum(p_1)
 
-
 def nextState(p):
     rand = random.random()
     p = np.cumsum(p)
