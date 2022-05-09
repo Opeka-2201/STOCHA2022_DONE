@@ -31,6 +31,7 @@ def generate_p_unif(K):
     p += 1/K
     return p
 
+
 def rand_permutation(y):
     i = random.choice(list(range(len(y))))
     j = random.choice(list(range(len(y))))
@@ -47,7 +48,8 @@ def change_community(x, K):
     x[i] = random.choices(K_l)[0]
     return x
 
-def concordance(x,y):
+
+def concordance(x, y):
     max = 0
     count = 0
     for _ in range(len(x)):
@@ -55,18 +57,16 @@ def concordance(x,y):
         for i in range(len(x)):
             if x[i] == y[i]:
                 count += 1
-        if count > max :
+        if count > max:
             max = count
         count = 0
     return max / len(x)
 
 
-for i in range(100):
-    
-
-
-
 N = 10
 K = 2
 p = generate_p_unif(K)
-x, G = generate_SBM(N, K, p, 2, 1)
+x, G = generate_SBM(N, K, p, 4, 2)
+
+print(x)
+print(G)
