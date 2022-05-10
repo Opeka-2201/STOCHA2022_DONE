@@ -4,18 +4,31 @@ from matplotlib import pyplot as plt
 import numpy as np
 import random
 
+
 def generate_SBM(N, K, p, a, b):
+    """
+    Function to generate a vector of community and an adjacency matrix 
+    following a SBM distribution
+    Args : N number of vertices
+           K number of communities
+           p vector of probabilty for communities
+           a parametre for the probability of a link between 2 vertices from same community
+           b parametre for the probability of a link between 2 vertices from different communities
+
+    return : x a vector of size N with community of each vertices
+             G a matrix of size NxN with link between each vertices
+    """
     A = a / N
     B = b / N
     if (len(p) != K):
         raise ValueError("p vector must have a size = K")
-    x = np.zeros(N)
-    for i in range(len(x)):
-        x[i] = random.choices(list(range(1, K+1)), p)[0]
+    x = np.zeros(N)  # creation of vector x
+    for i in range(len(x)): 
+        x[i] = random.choices(list(range(1, K+1)), p)[0] #assignement of communities for each vertices
 
-    G = np.zeros([N, N])
+    G = np.zeros([N, N])  # creation of matrix G
     for i in range(N):
-        for j in range(i+1, N):
+        for j in range(i+1, N):  # pyramidal link assignement  for every possible couple
             rand = random.random()
             if x[i] == x[j] and rand <= A:
                 G[i][j] = 1
@@ -27,10 +40,15 @@ def generate_SBM(N, K, p, a, b):
 
 
 def concordance(x, y):
+    """
+    Compute concordance between 2 vectors of communities
+    To use this function, vectors must have exactly 2 different communites
+    return pourcentage of concordance
+    """
     count1 = 0
     count2 = 0
     for i in range(len(x)):
-        if x[i] == y[i]:
+        if x[i] == y[i]: #this if statement stand for the permutation
             count1 += 1
         else:
             count2 += 1
@@ -39,7 +57,11 @@ def concordance(x, y):
 
 
 def computeN(x, g):
-    N = np.zeros(3)
+    """
+    function to compute the number of link between communities. 
+    There are only 3 possibilities
+    """
+    N = np.zeros(3) #N[0] -> 1-2, N[1] -> 1-1, N[2]->2-2
     N[0] = np.sum(g[x == 1][:, x == 2])
     N[1] = np.sum(g[x == 1][:, x == 1])/2
     N[2] = np.sum(g[x == 2][:, x == 2])/2
@@ -47,14 +69,22 @@ def computeN(x, g):
 
 
 def computeOm(x):
-    Om = np.zeros(3)
+    """
+    function to compute numbers of vertices in each community
+    We only need this functionnality for 2 communities
+    """
+    Om = np.zeros(3) #it's a size 3 vector to be more intuitive in the use
     Om[1] = len(x[x == 1])
     Om[2] = len(x[x == 2])
     return Om
 
 
 def computeNc(Om, N):
-    Nc = np.zeros(3)
+    """
+    function to compute the number of non-link between communities. 
+    There are only 3 possibilities
+    """
+    Nc = np.zeros(3)  # Nc[0] -> 1-2, Nc[1] -> 1-1, Nc[2]->2-2
     Nc[0] = Om[1]*Om[2] - N[0]
     Nc[1] = (Om[1]*(Om[1]-1)/2) - N[1]
     Nc[2] = (Om[2]*(Om[2]-1)/2) - N[2]
@@ -62,6 +92,10 @@ def computeNc(Om, N):
 
 
 def genX(n):
+    """
+    function to create a random vector of communities. 
+    We only need this functionnality for 2 communities and with uniform probability
+    """
     x = np.zeros(n)
     for i in range(n):
         x[i] = random.choice([1, 2])
@@ -69,11 +103,15 @@ def genX(n):
 
 
 def newY(x, g, N, Om):
+    """
+    function to change the community of a random vertice and 
+    adjust the N and Om variables to improve computation time
+    """
     i = random.randrange(0, len(x))
     newN = np.copy(N)
     newX = np.copy(x)
     newOm = np.copy(Om)
-    temp = np.sum(g[i, x[i] == x])
+    temp = np.sum(g[i, x[i] == x])  # reassigne the link 
     newN[int(x[i])] -= temp
     newN[0] += temp
     temp = np.sum(g[i][x[i] != x])
