@@ -111,19 +111,22 @@ def newY(x, g, N, Om):
     newN = np.copy(N)
     newX = np.copy(x)
     newOm = np.copy(Om)
-    temp = np.sum(g[i, x[i] == x])  # reassigne the link 
+    temp = np.sum(g[i, x[i] == x])  # reassigne every edges linked with the node i 
     newN[int(x[i])] -= temp
     newN[0] += temp
     temp = np.sum(g[i][x[i] != x])
     newN[0] -= temp
     newN[1 if x[i] == 2 else 2] += temp
-    newX[i] = 1 if x[i] == 2 else 2
-    newOm[int(x[i])] -= 1
+    newX[i] = 1 if x[i] == 2 else 2 # change the vertice i community
+    newOm[int(x[i])] -= 1 # update the count of vertices in each community
     newOm[int(newX[i])] += 1
     return newX, newN, newOm
 
 
 def computePGX(N, Nc, Om, A, B):
+    """
+    function to compute the logarithm of P(G|x)
+    """
     lg = N[0]*log(B) + Nc[0]*log(1-B)
     lg += (N[1] * log(A)) + (Nc[1] * log(1-A))
     lg += (N[2] * log(A)) + (Nc[2] * log(1-A))
@@ -131,42 +134,50 @@ def computePGX(N, Nc, Om, A, B):
 
 
 def computePXPGX(N, Om, A, B):
+    """
+    function to compute the logarithm of (P(G|x) * P(x))
+    P(x) is a constant and so not interessant for the maximization
+    This not usefull to compute it 
+    """
     Nc = computeNc(Om, N)
     pgx = computePGX(N, Nc, Om, A, B)
     return pgx
 
 
 def mhNextStep(x, g, Nx, Omx, A, B, pxpgx):
+    """
+    function to compute an iteration of the Metropolis-Hastingss algorithm
+    """
     y, Ny, Omy = newY(x, g, Nx, Omx)
     pypgy = computePXPGX(Ny, Omy, A, B)
-    if pypgy > pxpgx:
+    if pypgy > pxpgx:  #accept if the new vector have better probabilty
         return y, pypgy, Ny, Omy
-    else:
+    else: 
         u = random.random()
-        if log(u) < (pypgy-pxpgx):
+        if log(u) < (pypgy-pxpgx): #accept with the acceptance alpha
             return y, pypgy, Ny, Omy
-        else:
+        else:  #reject the new vector
             return x, pxpgx, Nx, Omx
 
 
 def mhAll(g, A, B, nbTests, nbIt):
+    """
+    function to compute nbTests times the Metropolis-Hastings algorithm with nbIt itération
+    return the best vector of all tests and all itérations
+    """
     n = g.shape[0]
     maxPXPGX = float("-inf")
     bestVector = np.zeros(n)
-    for i in range(nbTests):
+    for _ in range(nbTests): #To avoid local minimum
         x = genX(n)
         Nx = computeN(x, g)
         Omx = computeOm(x)
         pxpgx = computePXPGX(Nx, Omx, A, B)
-        for j in range(nbIt):
-            y, pypgy, Ny, Omy = mhNextStep(x, g, Nx, Omx, A, B, pxpgx)
-            if pypgy > maxPXPGX:
-                bestVector = np.copy(y)
-                maxPXPGX = pypgy
-            Nx = np.copy(Ny)
-            Omx = np.copy(Omy)
-            pxpgx = pypgy
-            x = np.copy(y)
+        for _ in range(nbIt): #classical algorithm 
+            x, pxpgx, Nx, Omx = mhNextStep(x, g, Nx, Omx, A, B, pxpgx)
+            if pxpgx > maxPXPGX:
+                bestVector = x
+                maxPXPGX = pxpgx
     return bestVector
 
 def graphB_A():

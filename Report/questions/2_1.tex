@@ -40,10 +40,13 @@ Dans le cas d'une distribution $SBM(N,K,p,A,B)$, la probabilité $\mathbb{P}(x|G
 \subsubsection{}
 \paragraph*{}
 Le terme qui va devenir un problème si N augmente, est le dénominateur de la fraction finale du point précédent. En effet, la complexité du calcul de l'intégral
-est exponentielle par rapport à N. Cependant, il n'est pas nécéssaire de connaitre ce terme car nous souhaitons maximiser $\mathbb{P}(x|G)$ et l'intégrale agira
-comme une constante. Elle n'apporte donc rien au problèmes de maximisation.
+est exponentielle par rapport à N. Cependant, il n'est pas nécéssaire de connaitre ce terme car nous souhaitons maximiser $\mathbb{P}(x|G)$ et l'intégrale se 
+simplifiera lors du calcul du taux d'acceptation $\alpha$ car elle est indépendante du vecteur $x$ et donc constante au cours des itérations de l'algorithme de 
+Metropolis-Hastings.
 \subsubsection{}
-
+Pour que Metropolis-Hastings fonctionne au mieux, il faut que la chaine de Markov générée par celui-ci soit ergodique, c'est-à-dire que tout état soit atteignable depuis n'importe quel autre état,
+en un nombre fini de pas. (graphe connexe et irréductible) \\
+Ici, dans notre distribution $q_{s}$, on vient modifier au hasard une composante à la fois du graphe ce qui nous assure de couvrir toutes les possibilités/états et qui nous assure donc une chaine de Markov ergodique.
 \subsubsection{}
 Le taux d'acceptation $\alpha$ peut être exprimé:
 \begin{align*}
@@ -60,3 +63,5 @@ Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calc
                =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
                &+ \sum_{1\leq i \leq j \leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
 \end{align*}
+Ce calcule peut encore être simplifié en mettant à jour les nombres $N_{i,j}(x,G)$, $N_{i,j}^c(x,G)$ et $\Omega_i(x)$ à partir des itérations précédentes. \\
+Nous l'avons implémenté dans notre algorithme pour améliorer grandement les temps de calcul.

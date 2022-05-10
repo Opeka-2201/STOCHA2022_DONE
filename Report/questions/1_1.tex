@@ -136,4 +136,33 @@ Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lig
 Après ces premières expériences sur les chaînes de Markov et après avoir remarqué que les distributions sont comme attendu stationnaires, nous pouvons conclure que la chaîne de Markov que nous avons réalisé est ergodique.
 Une telle chaîne permet d'obtenir la distribution stationnaire de deux manières différentes, soit en effectuant des réalisations différentes, soit en effectuant une chaîne assez longue.
 \\\\
-Pour être ergodique, une chaîne doit respecter 3 conditions :
+Pour être ergodique, une chaîne doit respecter 3 conditions : avoir un espace finit, être irréductible et être apériodique. Analysons ces 3 conditions dans notre cas précis.
+
+\begin{itemize}
+  \item Nous avons bien un espace finit d'états (1,2,3,4).
+  \item Nous avons bien une chaîne irréductible car la probabilité d'accéder à chaque noeud depuis un autre noeud est non nulle. On peut remarquer cela en observant bien que les noeuds apparaissent plusieurs fois lors de nos réalisations de la chaîne de Markov. On ne reste pas bloqués dans un sous-espace d'états.
+  \item Nous avons bien une chaîne de Markov apériodique car quand on calcule 
+  \begin{equation*}
+    Q = \begin{pmatrix}
+      0 & 0.1 & 0.1 & 0.8\\
+      1 & 0 & 0 & 0\\
+      0.6 & 0 & 0.1 & 0.3\\
+      0.4 & 0.1 0.5 & 0
+    \end{pmatrix}
+    Q^2 = \begin{pmatrix}
+      0.48 & 0.08 & 0.41 & 0.03\\
+      0 & 0.\\
+      \\
+    \end{pmatrix}
+  \end{equation*}
+
+  \begin{equation*}
+    Q^3 = \begin{pmatrix}
+      0.338 & 0.051 & 0.104 & 0.507\\
+      0.48 & 0.08 & 0.41 & 0.03\\
+      0.426 & 0.069 & 0.295 & 0.21\\
+      0.282 & 0.087 & 0.284 & 0.347
+    \end{pmatrix}
+\end{equation*}
+,on remarque bien que 
+\end{itemize}
