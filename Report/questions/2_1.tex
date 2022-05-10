@@ -63,5 +63,5 @@ Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calc
                =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
                &+ \sum_{1\leq i \leq j \leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
 \end{align*}
-Ce calcule peut encore être simplifié en mettant à jour les nombres $N_{i,j}(x,G)$, $N_{i,j}^c(x,G)$ et $\Omega_i(x)$ à partir des itérations précédentes. \\
-Nous l'avons implémenté dans notre algorithme pour améliorer grandement les temps de calcul.
+Ce calcul peut encore être simplifié en mettant à jour les nombres $N_{i,j}(x,G)$, $N_{i,j}^c(x,G)$ et $\Omega_i(x)$ à partir des itérations précédentes. \\
+Nous l'avons implémenté dans notre algorithme pour améliorer grandement les temps d'éxécution.
