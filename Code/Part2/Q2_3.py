@@ -106,7 +106,7 @@ def mhAll(g, A, B, nbTests, nbIt):
 file = sys.argv[1]  # paramètres initiaux
 nbTests = int(sys.argv[2])
 nbIt = int(sys.argv[3])
-g = np.load("G.npy")
+g = np.load(file)
 n = g.shape[0]
 p = [0.5, 0.5]
 a = 39.76
@@ -115,4 +115,4 @@ A = a/n
 B = b/n
 
 x = mhAll(g, A, B, nbTests, nbIt)
-np.save('x.npy', np.array(x, dtype=np.int8))
+np.save('Code/Part2/x.npy', np.array(x, dtype=np.int8))

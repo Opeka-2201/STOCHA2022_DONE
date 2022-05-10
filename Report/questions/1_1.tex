@@ -33,12 +33,14 @@ On remarque donc bien une convergence vers des probabilités et ceci peut import
   \centering
   \includegraphics[width=0.5\textwidth]{figs/evo_unif.png}
   \caption{Évolution des probabilités dans une distribution de départ uniforme}
+  \label{fig:unif}
 \end{figure}
 \\
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{figs/evo_fixed.png}
   \caption{Évolution des probabilités dans une distribution de départ fixée sur 3}
+  \label{fig:fixed}
 \end{figure}
 
 On remarque qu'après une vingtaine d'itérations on obtient la relation suivante :
@@ -47,19 +49,19 @@ On remarque qu'après une vingtaine d'itérations on obtient la relation suivant
   Q^t = Q^{t-1}
 \end{equation*}
 
-On en déduit donc que $\lim_{t \rightarrow \infty} Q^t \approx Q^20 $, en effet chaque ligne de $Q^t$ est égale à $[0.3488 , 0.0698 , 0.2326 , 0.3488]$. On a déjà remarqué dans les deux premières figures que peut importe le 
+On en déduit donc que $\lim_{t \rightarrow \infty} Q^t \approx Q^{20} $, en effet chaque ligne de $Q^t$ est égale à $[0.3488 , 0.0698 , 0.2326 , 0.3488]$. On a déjà remarqué dans les figures \ref{fig:unif} et \ref{fig:fixed} que peut importe le 
 point de départ, on converge vers les mêmes probabilités après un nombre suffisant d'itérations on montre alors avec $\pi_{t,\text{uniforme}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
 distribution de base uniforme et $\pi_{t,\text{fixé}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
 distribution de base fixée sur le cas $3$ :  
 
 \begin{align*}
-  \pi_{21,\text{uniforme}} &= \pi_{20,\text{uniforme}} Q = \pi_{20,\text{uniforme}}
+  \pi_{21,\text{uniforme}} &= \pi_{20,\text{uniforme}} Q = \pi_{20,\text{uniforme}}\\
   \pi_{21,\text{fixé}} &= \pi_{20,\text{fixé}} Q = \pi_{20,\text{fixé}} 
 \end{align*}
 
-On dit d'une distribution qu'elle est stationnaire si $\pi_t = \pi_t Q$, nous considérons donc nos deux distributions comme stationnaires et elles admettent les propriétés suivantes :
+On dit d'une distribution qu'elle est stationnaire si $\pi_t = \pi_t Q$, nous considérons donc nos deux distributions comme stationnaires et elles admettent les propriétés suivantes :\\
 \begin{itemize}
-  \item Ergodicité si elle est égale aux lignes de $\lim_{t \rightarrow \infty} Q^t$, comme prouvé dans la sous-section \textbf{1.1.4}.
+  \item Ergodicité si elle est égale aux lignes de $\lim_{t \rightarrow \infty} Q^t$, comme prouvé dans la sous-section \ref{section:1.1.4}.
   \item Unicité si la châine de Markov est irréductible.
 \end{itemize}
 
@@ -77,7 +79,7 @@ Nous allons simplement calculer $\mathbb{P}(X_t)$ avec un grand $t$ ce qui nous 
     0.3488 & 0.0698 & 0.2326 & 0.3488
   \end{pmatrix}
 \end{equation*}
-
+\newpage
 \subsubsection{}
 Afin de vérifier les résultats obtenus, nous effectuons des réalisations de notre chaîne de Markov. Nous pouvons mettre en tableau la proportion de réalisation 
 de chaque état lors de tests avec un nombre de pas croissant. Nous utilisons un point de départ distribué uniformément entre les 4 états car il a été prouvé
@@ -97,13 +99,41 @@ plus haut que ça n'avait pas d'influence.
   \caption{Proportion des états obtenus en fonction de nombre de pas}
   \label{tab:table-prop}
 \end{table}
-
 En comparant ce tableau avec les résultats obtenus avec les valeurs précédement obtenus, on remarque bien que les proportions sont respectées et font sens, on converge bien 
 vers les mêmes valeurs.
-
+\\\\
 Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lignes de $\lim_{t \rightarrow \infty} Q^t$ avec des fluctuations qui s'atténuent plus $t$ augmente :
 
-%% Inclure les figures que je vais faire mtn
+\begin{figure}[ht] 
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.5\linewidth]{figs/evo1.png} 
+    \caption{Proportion de l'état 1} 
+    \vspace{4ex}
+  \end{minipage}%%
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.5\linewidth]{figs/evo2.png} 
+    \caption{Proportion de l'état 2} 
+    \vspace{4ex}
+  \end{minipage} 
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.5\linewidth]{figs/evo3.png} 
+    \caption{Proportion de l'état 3} 
+    \vspace{4ex}
+  \end{minipage}
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=.5\linewidth]{figs/evo4.png} 
+    \caption{Proportion de l'état 4} 
+    \vspace{4ex}
+  \end{minipage} 
+\end{figure}
 
 \subsubsection{}
-Après ces premières expériences sur les chaînes de Markov, nous pouvons conclure que 
+\label{section:1.1.4}
+Après ces premières expériences sur les chaînes de Markov et après avoir remarqué que les distributions sont comme attendu stationnaires, nous pouvons conclure que la chaîne de Markov que nous avons réalisé est ergodique.
+Une telle chaîne permet d'obtenir la distribution stationnaire de deux manières différentes, soit en effectuant des réalisations différentes, soit en effectuant une chaîne assez longue.
+\\\\
+Pour être ergodique, une chaîne doit respecter 3 conditions :

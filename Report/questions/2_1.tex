@@ -8,24 +8,55 @@ Dans le cadre de ce projet, nous obtenons :
 \begin{equation*}
     \mathbb{P}(x|G) = \frac{\mathbb{P}(G|x)*\mathbb{P}(x)}{\mathbb{P}(G)}
 \end{equation*}
-Si on pose :
-\begin{equation*}
-    Z = \mathbb{P}(G) = \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x
-\end{equation*}
-Z est constant car $G$ ne changera pas.\\
-Nous pouvons simplifier la première équation en :
-\begin{equation*}
-    \mathbb{P}(x|G) = \frac{1}{Z}\mathbb{P}(G|x)*\mathbb{P}(x)
-\end{equation*}
-Regardons maintenant de plus près les 2 autres termes de notre équation:
-\begin{aligned}
-    \mathbb{P}(x) $= \prod_{u=1}^n p_{x_u} \\ 
-                  $= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
+Regardons maintenant de plus près les 3 termes de notre équation:
+\begin{align*}
+    \mathbb{P}(x) &= \prod_{u=1}^n p_{x_u} \\ 
+                  &= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
 \end{align*}
-\begin{aligned}
-    \mathbb{P}(G|x) $= \prod_{1 \leq u < v \leq n} W_{x_u,x_v}^{u_{uv}} \\ 
-                  $= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
+\begin{align*}
+    \mathbb{P}(G|x) &= \prod_{1 \leq u < v \leq n} W_{x_u,x_v}^{G_{u,v}} (1-W_{x_u,x_v})^{1-G_{u,v}}\\ 
+                    &= \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x,G)} (1-W_{i,j})^{N_{i,j}^c(x,G)}
+\end{align*}
+\begin{equation*}
+    \mathbb{P}(G) = \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x
+\end{equation*}
+Nous avons donc au final:
+\begin{equation*}
+    \mathbb{P}(x|G) = \frac{\prod_{i=1}^n p_i^{|\Omega_i(x)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x,G)} (1-W_{i,j})^{N_{i,j}^c(x,G)}}{ \int\mathbb{P}(G|x) \, \mathrm{d}x}
+\end{equation*}
+où:
+\begin{align*}
+    N_{i,j}(x,G)&=\sum_{u<v,x_u=i,x_v=j} \mathbb{1} (G_{uv}=1) \\
+    N_{i,j}^c(x,G) &= \sum_{u<v,x_u=i,x_v=j} \mathbb{1} (G_{uv}=0)\\
+                   &= |\Omega_i(x)|*|\Omega_j(x)| - N_{i,j}(x,G) \text{  si }i \ne j\\
+                   &= \frac{|\Omega_i(x)|*(|\Omega_i(x)|-1)}{2} - N_{i,i}(x,G) \text{  si }i = j
+\end{align*}
+\paragraph*{}
+Dans le cas d'une distribution $SBM(N,K,p,A,B)$, la probabilité $\mathbb{P}(x|G)$ sera simplifiée.
+\begin{align*}
+    \mathbb{P}(G|x) &= \prod_{1 \leq i \leq j \leq k} A^{N_{i,i}(x,G)} (1-A)^{N_{i,i}^c(x,G)}\text{ si }i=j\\
+                    &= \prod_{1 \leq i \leq j \leq k} B^{N_{i,j}(x,G)} (1-B)^{N_{i,j}^c(x,G)}\text{ si }i \ne j
 \end{align*}
 \subsubsection{}
+\paragraph*{}
+Le terme qui va devenir un problème si N augmente, est le dénominateur de la fraction finale du point précédent. En effet, la complexité du calcul de l'intégral
+est exponentielle par rapport à N. Cependant, il n'est pas nécéssaire de connaitre ce terme car nous souhaitons maximiser $\mathbb{P}(x|G)$ et l'intégrale agira
+comme une constante. Elle n'apporte donc rien au problèmes de maximisation.
 \subsubsection{}
+
 \subsubsection{}
+Le taux d'acceptation $\alpha$ peut être exprimé:
+\begin{align*}
+    \alpha &= \frac{\mathbb{P}(x_t|G)}{\mathbb{P}(x_{t-1}|G)} \\
+           &=\frac{\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_t)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{ij}(x_t,G)} (1-W_{i,j})^{N_{i,j}^c(x_t,G)}}{ \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x}}{\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_{t-1})|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x_{t-1},G)} (1-W_{i,j})^{N_{i,j}^c(x_{t-1},G)}}{ \int\mathbb{P}(G|x) \, \mathrm{d}x}}\\
+           &=\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_t)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{ij}(x_t,G)} (1-W_{i,j})^{N_{i,j}^c(x_t,G)}}{\prod_{i=1}^n p_i^{|\Omega_i(x_{t-1})|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x_{t-1},G)} (1-W_{i,j})^{N_{i,j}^c(x_{t-1},G)}}
+\end{align*}
+Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calculer son logarithme. 
+\begin{align*}
+    \log (\mathbb{P}(x|G)) &= \sum_{i=1}^k|\Omega_i(x)|\log(p_i) + \sum_{1\leq i \leq j \ leq k} N_{i,j}(x,G) \log(W_{i,j})+N_{i,j}^c(x,G)\log(1-W_{i,j})\\
+    \log\alpha =& \log (\mathbb{P}(x_t|G)) - \log (\mathbb{P}(x_{t-1}|G))\\
+               =& \sum_{i=1}^k|\Omega_i(x_t)|\log(p_i) + \sum_{1\leq i \leq j \ leq k} N_{i,j}(x_t,G) \log(W_{i,j})+N_{i,j}^c(x_t,G)\log(1-W_{i,j})\\
+               &- \sum_{i=1}^k|\Omega_i(x_{t-1})|\log(p_i) - \sum_{1\leq i \leq j \ leq k} N_{i,j}(x{t-1},G) \log(W_{i,j})+N_{i,j}^c(x{t-1},G)\log(1-W_{i,j})\\
+               =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \ leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
+               &+ \sum_{1\leq i \leq j \ leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
+\end{align*}

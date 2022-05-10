@@ -33,24 +33,24 @@ plt.plot(P_1[0, :])
 plt.plot(P_1[1, :])
 plt.plot(P_1[2, :])
 plt.plot(P_1[3, :])
-plt.title("Évolution de la probabilité de P(X_t = x) dans un cas de base uniforme")
-plt.legend(["P(X_t = 1)", "P(X_t = 2)", "P(X_t = 3)", "P(X_t = 4)"])
-plt.xlabel("t")
+plt.title("Évolution de la probabilité de $P(X_t = x)$ dans un cas de base uniforme")
+plt.legend(["$P(X_t = 1)$", "$P(X_t = 2)$", "$P(X_t = 3)$", "$P(X_t = 4)$"])
+plt.xlabel("$t$")
 plt.ylabel("Probability")
-# plt.savefig("Report/figs/evo_unif.png")
-plt.show()
+plt.savefig("Report/figs/evo_unif.png")
+# plt.show()
 
 plt.figure()
 plt.plot(P_2[0, :])
 plt.plot(P_2[1, :])
 plt.plot(P_2[2, :])
 plt.plot(P_2[3, :])
-plt.title("Évolution de la probabilité de P(X_t = x) dans un cas de base fixé sur 3")
-plt.legend(["P(X_t = 1)", "P(X_t = 2)", "P(X_t = 3)", "P(X_t = 4)"])
-plt.xlabel("t")
+plt.title("Évolution de la probabilité de $P(X_t = x)$ dans un cas de base fixé sur 3")
+plt.legend(["$P(X_t = 1)$", "$P(X_t = 2)$", "$P(X_t = 3)$", "$P(X_t = 4)$"])
+plt.xlabel("$t$")
 plt.ylabel("Probability")
-# plt.savefig("Report/figs/evo_fixed.png")
-plt.show()
+plt.savefig("Report/figs/evo_fixed.png")
+# plt.show()
 
 print("\nUniformly distributed case :")
 print(" P(X_t = 1) = %s" % (P_1[0, time_limit-1]))
@@ -106,5 +106,48 @@ for nb_real in [100,1000,1000,10000,100000]:
   mk = makeRealisation(nextState([0.25,0.25,0.25,0.25]),nb_real)
   print(numberOfOccurences(mk))
 
-for i in range(100001):
-    
+sum = np.zeros([4,10000])
+mk = np.zeros([4,10000])
+
+state = nextState([0.25,0.25,0.25,0.25])
+
+for i in range(10000):
+  mk[state-1][i] = 1
+  indices = list()
+  for j in range(0,i+1):
+    indices.append(j)
+
+  sum[0][i] = mk[0][indices].sum() / (i+1)
+  sum[1][i] = mk[1][indices].sum() / (i+1)
+  sum[2][i] = mk[2][indices].sum() / (i+1)
+  sum[3][i] = mk[3][indices].sum() / (i+1)
+
+  state = nextState(Q[state-1])
+
+plt.figure()
+plt.plot(sum[0],'red')
+plt.title("Évolution de la proportion d'états $P(X_t = 1)$")
+plt.xlabel("$t$")
+plt.savefig('Report/figs/evo1.png')
+# plt.show()
+
+plt.figure()
+plt.plot(sum[1],'blue')
+plt.title("Évolution de la proportion d'états $P(X_t = 2)$")
+plt.xlabel("$t$")
+plt.savefig('Report/figs/evo2.png')
+# plt.show()
+
+plt.figure()
+plt.plot(sum[2],'orange')
+plt.title("Évolution de la proportion d'états $P(X_t = 3)$")
+plt.xlabel("$t$")
+plt.savefig('Report/figs/evo3.png')
+# plt.show()
+
+plt.figure()
+plt.plot(sum[3],'green')
+plt.title("Évolution de la proportion d'états $P(X_t = 4)$")
+plt.xlabel("$t$")
+plt.savefig('Report/figs/evo4.png')
+# plt.show()

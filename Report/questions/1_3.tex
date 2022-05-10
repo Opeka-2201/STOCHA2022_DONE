@@ -16,7 +16,33 @@ Pour ce faire nous allons utiliser la distribution de proposition énoncée avec
 \end{equation*}
 
 \subsubsection{}
+Au vu du choix de notre distribution $q(y|x)$ qui est symétrique, on sait que lors du calcul de 
+\begin{equation*}
+  \frac{p_X(y^{(t)})}{p_X(x^{(t-1)})} \frac{q(x^{(t-1)}|y^{(t)})}{q(y^{(t)}|x^{(t-1)})}
+\end{equation*}
+
+La deuxième partie de ce produit se simplifiera au vu de la symétrie de la distribution car
+\begin{equation*}
+  q(x^{(t-1)}|y^{(t)}) = q(y^{(t)}|x^{(t-1)})
+\end{equation*}
+On conclut donc que $q(y|x)$ est un bon choix de distribution pour notre algorithme de Metropolis-Hastings comme vu au point 1.2.2 .
 
 \subsubsection{}
+Nous allons maintenant réaliser une grande réalisation de notre chaîne de Markov afin de constater la présence d'une convergence :
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/convergence_mean.png}
+  \caption{Convergence de la moyenne pour deux valeurs de $r$}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figs/convergence_var.png}
+  \caption{Convergence de la variance pour deux valeurs de $r$}
+\end{figure}
+
+Au vu des deux figures ci-dessus, on remarque bien que les valeurs convergent et à des taux différents en fonction de $r$. En effet, plus $r$ est grand, plus on converge rapidement et ce car 
+plus $r$ grandit, plus la proportion du cas $0 \leq x \leq K \text{et } y = x-1$ va prendre de l'importance dans notre distribution. Ce qui provoquera une convergence 
 
 \subsubsection{}
