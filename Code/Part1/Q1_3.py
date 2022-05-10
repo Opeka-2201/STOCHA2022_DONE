@@ -8,19 +8,8 @@ p = 0.3
 r = 0.1
 tolerance  = 600
 
-def q_distrib(y, x):
-    if x == 0 and y == 0:
-        return r
-    elif x == K and y == K:
-        return (1-r)
-    elif 0 < x <= K and y == (x-1):
-        return r
-    elif 0 <= x < K and y == (x+1):
-        return (1-r)
-    else:
-        return 0
 
-def y_gen(x0):
+def y_gen(x0): #making a y candidate from the q distribution given in the statement
     u = np.random.random()
     if x0 == 0 and u <= r:
         return 0
@@ -35,16 +24,15 @@ def y_gen(x0):
     else:
         return x0 + 1
 
-def bin(k):
+def bin(k): #binomial distribution calculation
     x = binom(K, p).pmf(k)
     return x
 
 def alphaCalc(x0, y):
-    alpha = (bin(y)/bin(x0))# *(q_distrib(x0, y)/q_distrib(y, x0))
-    # print(alpha)
+    alpha = (bin(y)/bin(x0))# Because of the symetric distribution q, the fraction (q_distrib(x0, y)/q_distrib(y, x0)) is equal to 1 and does not change alpha
     return min(alpha, 1)
 
-def mhNextStep(x0):
+def mhNextStep(x0): #An itteration of the MH algorithm literllay like given in the statement too
     y = y_gen(x0)
     alpha = alphaCalc(x0, y)
     u = np.random.random()
@@ -63,11 +51,11 @@ def mhAll(x_start):
     std = list()
     x0 = x_start
     t = 0
-    while t < tolerance:
+    while t < tolerance: # doing multiple iterations (in fonction of the tolerance) with the help of last function mhNextStep
         result.append(mhNextStep(x0))
-        curr_mean = sum(result)/len(result)
+        curr_mean = sum(result)/len(result) #calculating mean
         mean.append(curr_mean)
-        std.append(sum((x-curr_mean)**2 for x in result) / len(result))
+        std.append(sum((x-curr_mean)**2 for x in result) / len(result)) #calculating standard deviation
         x0 = result[-1]
         t += 1
     return [result, mean, std]

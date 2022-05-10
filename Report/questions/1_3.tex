@@ -28,6 +28,7 @@ La deuxième partie de ce produit se simplifiera au vu de la symétrie de la dis
 On conclut donc que $q(y|x)$ est un bon choix de distribution pour notre algorithme de Metropolis-Hastings comme vu au point 1.2.2 .
 
 \subsubsection{}
+\label{section:1.3.2}
 Nous allons maintenant réaliser une grande réalisation de notre chaîne de Markov afin de constater la présence d'une convergence :
 
 \begin{figure}[H]
@@ -43,14 +44,27 @@ Nous allons maintenant réaliser une grande réalisation de notre chaîne de Mar
 \end{figure}
 
 Au vu des deux figures ci-dessus, on remarque bien que les valeurs convergent et à des taux différents en fonction de $r$. En effet, plus $r$ est grand, plus on converge rapidement et ce car 
-plus $r$ grandit, plus la proportion du cas $0 \leq x \leq K \text{et } y = x-1$ va prendre de l'importance dans notre distribution. Ce qui provoquera une convergence 
+plus $r$ grandit, plus la proportion du cas $0 \leq x \leq K \text{ et } y = x-1$ va prendre de l'importance dans notre distribution, ce qui provoquera une convergence. 
 
 \subsubsection{}
 On réalise des histogrammes des fréquences d'apparition pour les deux valeurs de $r$ :
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.5\textwidth]{figs/histo1.png}
-  \includegraphics[width=.5\textwidth]{figs/histo2.png}
-  \caption{Fréquences d'apparition}
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/histo1.png}
+    \caption{A figure}
+    \label{fig:test1}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/histo2.png}
+    \caption{Another figure}
+    \label{fig:test2}
+  \end{minipage}
 \end{figure}
+
+En comparant les résultats obtenus avec les figures obtenues à la section \ref{section:1.3.2}, on remarque bien qu'on converge vers les mêmes valeurs de moyenne et de variance. Par contre, 
+en comparant ces mêmes résultats avec la distribution théorique, on remarque que un des $r$ est beaucoup plus adapté à nos calculs. En effet, dans le cas où $r = 0.5$, nos fréquences d'apparition 
+convergent bien vers les valeurs attendues par la distribution théorique.

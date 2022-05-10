@@ -2,33 +2,42 @@ Nous allons maintenant nous attarder sur l'aspect théorique de l'algorithme de
 Metropolis-Hastings avant de passer à l'aspect pratique.
 
 \subsubsection{}
-Soit $\pi_0$ une distribution initiale d'une chaîne de Markov invariante dans le temps et $Q$ la
-matrice de transition :
+On veut montrer que $\pi_0$ est une distribution stationnaire sachant que une matrice de transition $Q$ et une distribution initiale $\pi_0$ 
+d'une chaîne de Markov invariante dans le temps qui satisfont les équations de balance détaillée :
 \begin{equation*}
-  \forall i,j \in \{1,...,N\} : \pi_0(i)[Q]_{i,j} = \pi_0(j)[Q]_{j,i}
+  \forall i,j \in \{ 1,\dots,N \}, \pi_0(i)[Q]_{i,j} = \pi_0(j)[Q]_{j,i}
 \end{equation*}
 
-Si $\pi_0$ est une distribution stationnaire de notre chaîne de Markov alors, avec $Q$ la matrice de
-transition :
-\begin{equation}
-  [\pi_0 Q]_j = [\pi_0]_j
-\end{equation}
+On reprend donc les définitions de $\pi_0$ et de $Q$ :
+\begin{equation*}
+  \pi_0 = [P(X_0=x_1) \dots P(X_0=x_k) \dots P(X_0=x_n)]
+\end{equation*}
+$$Q = \begin{pmatrix}
+  P(X_1 = x_1|X_0=x_1) & \dots & P(X_1 = x_n|X_0=x_1)\\
+  \dots & P(X_1 = x_n|X_0=x_n) & \dots\\
+  P(X_1 = x_1|X_0=x_n) & \dots & P(X_1 = x_n|X_0=x_n)
+\end{pmatrix}$$
 
-Partons du membre de gauche :
+Sachant que la chaîne de Markov est invariante, on a $Q_0 = Q_1 = \dots = Q_n = Q$ et on sait que la matrice de transition et la distribution initiale respectent les équations de balance détaillée :
 
 \begin{align*}
-  [\pi_0 Q]_j &= \sum_{k = 1}^N \pi_k Q_{k,j} \hspace{2cm} \text{(définition du produit scalaire)}\\
-              &= \sum_{k = 1}^N \pi_j Q_{j,k} \hspace{2cm} \text{(par hypothèse des équations de balance détaillées)}\\
-              &= [\pi_0]_j \underbrace{\sum_{k=1}^N Q_{j,k}}_\textrm{=1} \hspace{2cm} \text{(définition de la matrice de transition)}\\
-              &= [\pi_0]_j \hspace{2cm} (\pi \text{est donc bien une distribution stationnaire})
+  \forall i,j \in \{ 1,\dots,N \}, \pi_0(i)[Q]_{i,j} &= \pi_0(j)[Q]_{j,i}\\
+  P(X_0=x_i)P(X_1=x_j|X_0=x_i) &= P(X_0 = x_j)P(X_1=x_i|X_0=X_j)\\
+  P(X_0=x_i)\frac{P(X_1=x_j,X_0=x_i)}{P(X_0=x_i)} &= P(X_0=x_j)\frac{P(X_1=x_i,X_0=x_j)}{P(X_0=x_j)} \text{ par Bayes}\\
+  P(X_1=x_j,X_0=x_i) &= P(X_1=x_i,X_0=x_j) \forall i,j
 \end{align*}
 
-On peut finalement conclure sur l'unicité de $\pi_0$. Pour que la distribution stationnaire soit unique, il faut que le chaîne de Markov soit irréductible, c'est-à-dire que 
-si on représente notre chaîne selon un graphe avec un poids par arête représentant les probabilités, celui-ci doit être connexe.
+On sait également que au vu de la forme de $\pi_0$ et $Q$ vue plus haut et que $\pi_1 = \pi_0 * Q$ :
+
+\begin{align*}
+  P(X_1=x_j) &= \sum_{k=1}^n P(X_0=x_k)P(X_1=x_j|X_0=x_k)\\
+  P(X_1=x_j) &= \sum_{k=1}^n P(X_0=x_k)\frac{P(X_1=x_j,X_0=x_k)}{P(X_0=x_k)}\\
+  P(X_1=x_j) &= \sum_{k=1}^n P(X_1=x_j,X_0=x_k) = \sum_{k=1}^n P(X_1=x_k,X_0=x_j)\\
+  P(X_1=x_j) &= \sum_{k=1}^n P(X_1=x_k,X_0=x_j) = P(X_0=x_j)
+\end{align*}
+
+On vérifie cela pour chaque $j$, ce qui montre que $\pi_0 = \pi_1$ et que $\pi_0$ est une distribution stationnaire. 
 
 \subsubsection{}
-En repartant du résultat précédement obtenu :
-\begin{equation*}
-  \forall i,j \in {1,...,N} : \pi_0(i)[Q]_{i,j} = \pi_0(j)[Q]_{j,i}
-\end{equation*}
+
 

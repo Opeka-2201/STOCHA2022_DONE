@@ -28,22 +28,22 @@ Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs
   \end{pmatrix}$ 
 \end{itemize}
 
-On remarque donc bien une convergence vers des probabilités et ceci peut importe le cas de départ, on peut montrer cette convergence sur les figures ci-dessous :
+On remarque donc bien une convergence vers des probabilités et ceci peut importe le cas de départ, on peut montrer cette convergence sur les figures ci-dessous \ref{fig:unif} :
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.5\textwidth]{figs/evo_unif.png}
+  \includegraphics[width=0.6\textwidth]{figs/evo_unif.png}
   \caption{Évolution des probabilités dans une distribution de départ uniforme}
   \label{fig:unif}
 \end{figure}
 \\
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.5\textwidth]{figs/evo_fixed.png}
+  \includegraphics[width=0.6\textwidth]{figs/evo_fixed.png}
   \caption{Évolution des probabilités dans une distribution de départ fixée sur 3}
   \label{fig:fixed}
 \end{figure}
-
-On remarque qu'après une vingtaine d'itérations on obtient la relation suivante :
+\\
+On remarque également qu'après une vingtaine d'itérations on obtient la relation suivante :
 
 \begin{equation*}
   Q^t = Q^{t-1}
@@ -79,7 +79,6 @@ Nous allons simplement calculer $\mathbb{P}(X_t)$ avec un grand $t$ ce qui nous 
     0.3488 & 0.0698 & 0.2326 & 0.3488
   \end{pmatrix}
 \end{equation*}
-\newpage
 \subsubsection{}
 Afin de vérifier les résultats obtenus, nous effectuons des réalisations de notre chaîne de Markov. Nous pouvons mettre en tableau la proportion de réalisation 
 de chaque état lors de tests avec un nombre de pas croissant. Nous utilisons un point de départ distribué uniformément entre les 4 états car il a été prouvé
@@ -104,31 +103,32 @@ vers les mêmes valeurs.
 \\\\
 Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lignes de $\lim_{t \rightarrow \infty} Q^t$ avec des fluctuations qui s'atténuent plus $t$ augmente :
 
-\begin{figure}[ht] 
-  \begin{minipage}[b]{0.5\linewidth}
+\begin{figure}[!h]
+  \centering
+  \begin{minipage}{.5\textwidth}
     \centering
-    \includegraphics[width=.5\linewidth]{figs/evo1.png} 
-    \caption{Proportion de l'état 1} 
-    \vspace{4ex}
-  \end{minipage}%%
-  \begin{minipage}[b]{0.5\linewidth}
+    \includegraphics[width=\linewidth]{figs/evo1.png}
+    \caption{Proportion de l'état 1}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
     \centering
-    \includegraphics[width=.5\linewidth]{figs/evo2.png} 
-    \caption{Proportion de l'état 2} 
-    \vspace{4ex}
-  \end{minipage} 
-  \begin{minipage}[b]{0.5\linewidth}
-    \centering
-    \includegraphics[width=.5\linewidth]{figs/evo3.png} 
-    \caption{Proportion de l'état 3} 
-    \vspace{4ex}
+    \includegraphics[width=\linewidth]{figs/evo2.png}
+    \caption{Proportion de l'état 2}
   \end{minipage}
-  \begin{minipage}[b]{0.5\linewidth}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \begin{minipage}{.5\textwidth}
     \centering
-    \includegraphics[width=.5\linewidth]{figs/evo4.png} 
-    \caption{Proportion de l'état 4} 
-    \vspace{4ex}
-  \end{minipage} 
+    \includegraphics[width=\linewidth]{figs/evo3.png}
+    \caption{Proportion de l'état 3}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/evo4.png}
+    \caption{Proportion de l'état 4}
+  \end{minipage}
 \end{figure}
 
 \subsubsection{}
