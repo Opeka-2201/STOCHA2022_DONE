@@ -1,7 +1,7 @@
 \paragraph{}
-Rappelons d'abord brievement ce qu'est une chaîne de Markov. Une chaîne de Markov est un outil mathématique stochastique, qui utilise un principe de "non-mémoire". Tout état d'un système est simplement calculé à partir du précédent, ce qui en facilite l'analyse.
+Rappelons d'abord brièvement ce qu'est une chaîne de Markov. Une chaîne de Markov est un outil mathématique stochastique, qui utilise un principe de "non-mémoire". Tout état d'un système est simplement calculé à partir du précédent, ce qui en facilite l'analyse.
 \\\\
-Ces chaînes sont simplement décrites mathématiquement comme suit avec $X_1, X_2,..., X_t$ une suite de variables aléatoires qui définit une chaîne de Markov
+Ces chaînes sont simplement décrites mathématiquement comme suit avec $X_1, X_2,..., X_t$ une suite de variables aléatoires qui définissent une chaîne de Markov
 si (pour t > 1) elle suit cette relation :
 \begin{equation*}
   \mathbb{P}(X_1, X_2, ..., X_t) = \mathbb{P}(X_1)\prod_{l = 2}^{t}\mathbb{P}(X_l | X_{l-1}) 
@@ -9,7 +9,7 @@ si (pour t > 1) elle suit cette relation :
 
 \subsubsection{}
 
-Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs demandées, ici avec $t = 20$ (suffit pour avoir convergé) :
+Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs demandées, ici avec $t = 20$ (suffisant pour atteindre la convergence) :
 \begin{itemize}
   \item Cas de base distribué uniformément : $\mathbb{P}(X_t = x) = 
   \begin{pmatrix}
@@ -28,7 +28,7 @@ Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs
   \end{pmatrix}$ 
 \end{itemize}
 
-On remarque donc bien une convergence vers des probabilités et ceci peut importe le cas de départ, on peut montrer cette convergence sur les figures ci-dessous \ref{fig:unif} :
+Nous remarquons donc bien une convergence vers des probabilités et ceci peut importe le cas de départ, nous pouvons montrer cette convergence sur les figures ci-dessous \ref{fig:unif} :
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{figs/evo_unif.png}
@@ -43,14 +43,14 @@ On remarque donc bien une convergence vers des probabilités et ceci peut import
   \label{fig:fixed}
 \end{figure}
 \\
-On remarque également qu'après une vingtaine d'itérations on obtient la relation suivante :
+Nous remarquons également qu'après une vingtaine d'itérations on obtient la relation suivante :
 
 \begin{equation*}
   Q^t = Q^{t-1}
 \end{equation*}
 
-On en déduit donc que $\lim_{t \rightarrow \infty} Q^t \approx Q^{20} $, en effet chaque ligne de $Q^t$ est égale à $[0.3488 , 0.0698 , 0.2326 , 0.3488]$. On a déjà remarqué dans les figures \ref{fig:unif} et \ref{fig:fixed} que peut importe le 
-point de départ, on converge vers les mêmes probabilités après un nombre suffisant d'itérations on montre alors avec $\pi_{t,\text{uniforme}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
+Nous en déduisons donc que $\lim_{t \rightarrow \infty} Q^t \approx Q^{20} $, en effet chaque ligne de $Q^t$ est égale à $[0.3488 , 0.0698 , 0.2326 , 0.3488]$. Nous avons déjà remarqué dans les figures \ref{fig:unif} et \ref{fig:fixed} que peu importe le 
+point de départ, nous convergeons vers les mêmes probabilités après un nombre suffisant d'itérations. Nous montrons alors avec $\pi_{t,\text{uniforme}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
 distribution de base uniforme et $\pi_{t,\text{fixé}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
 distribution de base fixée sur le cas $3$ :  
 
@@ -98,10 +98,10 @@ plus haut que ça n'avait pas d'influence.
   \caption{Proportion des états obtenus en fonction de nombre de pas}
   \label{tab:table-prop}
 \end{table}
-En comparant ce tableau avec les résultats obtenus avec les valeurs précédement obtenus, on remarque bien que les proportions sont respectées et font sens, on converge bien 
+En comparant ce tableau avec les résultats obtenus avec les valeurs précédement obtenues, nous remarquons bien que les proportions sont respectées et sont cohérentes, nous convergeons 
 vers les mêmes valeurs.
 \\\\
-Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lignes de $\lim_{t \rightarrow \infty} Q^t$ avec des fluctuations qui s'atténuent plus $t$ augmente :
+Pour montrer plus de détails, nous montrons que nous approchons bien des valeurs des lignes de $\lim_{t \rightarrow \infty} Q^t$ avec des fluctuations qui s'atténuent plus $t$ augmente :
 
 \begin{figure}[!h]
   \centering
@@ -136,10 +136,10 @@ Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lig
 Après ces premières expériences sur les chaînes de Markov et après avoir remarqué que les distributions sont comme attendu stationnaires, nous pouvons conclure que la chaîne de Markov que nous avons réalisé est ergodique.
 Une telle chaîne permet d'obtenir la distribution stationnaire de deux manières différentes, soit en effectuant des réalisations différentes, soit en effectuant une chaîne assez longue.
 \\\\
-Pour être ergodique, une chaîne doit respecter 3 conditions : avoir un espace finit, être irréductible et être apériodique. Analysons ces 3 conditions dans notre cas précis.
+Pour être ergodique, une chaîne doit respecter 3 conditions : avoir un espace fini, être irréductible et être apériodique. Analysons ces 3 conditions dans notre cas précis.
 
 \begin{itemize}
-  \item Nous avons bien un espace finit d'états (1,2,3,4).
+  \item Nous avons bien un espace fini d'états (1,2,3,4).
   \item Nous avons bien une chaîne irréductible car la probabilité d'accéder à chaque noeud depuis un autre noeud est non nulle. On peut remarquer cela en observant bien que les noeuds apparaissent plusieurs fois lors de nos réalisations de la chaîne de Markov. On ne reste pas bloqués dans un sous-espace d'états.
   \item Nous avons bien une chaîne de Markov apériodique car quand on calcule 
   \begin{equation*}

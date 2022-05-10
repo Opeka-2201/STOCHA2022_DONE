@@ -1,6 +1,6 @@
 \subsubsection*{Notre implémentation}
 \paragraph*{}
-Pour implémenter l'algorithme de Metropolis-Hastings, nous avons décider de 
+Pour implémenter l'algorithme de Metropolis-Hastings, nous avons décidé de 
 procéder étape par étape et cela se reflète bien dans nos fonctions. Chaque 
 fonction a été une étape dans notre compréhension du problème. 
 \\\\
@@ -15,7 +15,7 @@ que cette partie était aussi inutile car ce terme reste constant dans notre cas
 donc rien a la maximisation de $\mathbb{P}(x|G)$. 
 \\\\
 Nous avons donc abordé le dernier morceau qui était en fait le seul utile et 
-nous avons rencontrer pas mal de problèmes d'abord du à de simples erreurs de code. 
+nous avons rencontrer pas mal de problèmes d'abord dûs à de simples erreurs de code. 
 \\\\
 Une fois tous ces soucis réglés, nous avions un algorithme fonctionnel mais 
 très loin d'être efficace. Nous avons donc fait des analyses temporelles pour trouver la partie 
@@ -27,7 +27,7 @@ Nous avons alors implémenté une mise à jour de la variable $N$ à partir de c
 précédent. Il nous a ensuite paru logique d'étendre cette méthode à la variable $Om$. Vous pouvez 
 trouver nos étapes de mise à jour des variables dans la fonction \textbf{nextY}. Quand nous avons
 passé cette étape, le code à tout de suite été beaucoup plus efficace au point que nous avons doublé
-le nombre d'itérations pour atteindre 1.000.000 et cela nous a pris moins de temps que pour la  version précédente.
+le nombre d'itérations pour atteindre 1.000.000 et cela nous a pris moins de temps que pour la version précédente.
 \\\\
 Par après, nous nous sommes demandé comment 
 éviter de tomber dans un minimum local et nous avons pensé que faire plusieurs tests en prenant 

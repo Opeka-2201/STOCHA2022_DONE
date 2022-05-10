@@ -2,13 +2,13 @@ Nous allons maintenant nous attarder sur l'aspect théorique de l'algorithme de
 Metropolis-Hastings avant de passer à l'aspect pratique.
 
 \subsubsection{}
-On veut montrer que $\pi_0$ est une distribution stationnaire sachant que une matrice de transition $Q$ et une distribution initiale $\pi_0$ 
+Nous voulons montrer que $\pi_0$ est une distribution stationnaire sachant que une matrice de transition $Q$ et une distribution initiale $\pi_0$ 
 d'une chaîne de Markov invariante dans le temps qui satisfont les équations de balance détaillée :
 \begin{equation*}
   \forall i,j \in \{ 1,\dots,N \}, \pi_0(i)[Q]_{i,j} = \pi_0(j)[Q]_{j,i}
 \end{equation*}
 
-On reprend donc les définitions de $\pi_0$ et de $Q$ :
+Nous reprenons donc les définitions de $\pi_0$ et de $Q$ :
 \begin{equation*}
   \pi_0 = [P(X_0=x_1) \dots P(X_0=x_k) \dots P(X_0=x_n)]
 \end{equation*}
@@ -18,7 +18,7 @@ $$Q = \begin{pmatrix}
   P(X_1 = x_1|X_0=x_n) & \dots & P(X_1 = x_n|X_0=x_n)
 \end{pmatrix}$$
 
-Sachant que la chaîne de Markov est invariante, on a $Q_0 = Q_1 = \dots = Q_n = Q$ et on sait que la matrice de transition et la distribution initiale respectent les équations de balance détaillée :
+Sachant que la chaîne de Markov est invariante, nous avons $Q_0 = Q_1 = \dots = Q_n = Q$ et nous savons que la matrice de transition et la distribution initiale respectent les équations de balance détaillée :
 
 \begin{align*}
   \forall i,j \in \{ 1,\dots,N \}, \pi_0(i)[Q]_{i,j} &= \pi_0(j)[Q]_{j,i}\\
@@ -27,7 +27,7 @@ Sachant que la chaîne de Markov est invariante, on a $Q_0 = Q_1 = \dots = Q_n =
   P(X_1=x_j,X_0=x_i) &= P(X_1=x_i,X_0=x_j) \forall i,j
 \end{align*}
 
-On sait également que au vu de la forme de $\pi_0$ et $Q$ vue plus haut et que $\pi_1 = \pi_0 * Q$ :
+Nous savons également que au vu de la forme de $\pi_0$ et $Q$ vue plus haut et que $\pi_1 = \pi_0 * Q$ :
 
 \begin{align*}
   P(X_1=x_j) &= \sum_{k=1}^n P(X_0=x_k)P(X_1=x_j|X_0=x_k)\\
@@ -36,26 +36,26 @@ On sait également que au vu de la forme de $\pi_0$ et $Q$ vue plus haut et que 
   P(X_1=x_j) &= \sum_{k=1}^n P(X_1=x_k,X_0=x_j) = P(X_0=x_j)
 \end{align*}
 
-On vérifie cela pour chaque $j$, ce qui montre que $\pi_0 = \pi_1$ et que $\pi_0$ est une distribution stationnaire. Cette distribution est unique si la chaîne de Markov induite par la matrice de transition $Q$ est irréductible. 
+Nous vérifions cela pour chaque $j$, ce qui montre que $\pi_0 = \pi_1$ et que $\pi_0$ est une distribution stationnaire. Cette distribution est unique si la chaîne de Markov induite par la matrice de transition $Q$ est irréductible. 
 
 \subsubsection{}
-En remplaçant $p_X$ par $f(x) = cp_X$, on recalcule la probabilté d'acceptation de l'algorithme de Metropolis-Hastings comme suit :
+En remplaçant $p_X$ par $f(x) = cp_X$, nous recalculons la probabilté d'acceptation de l'algorithme de Metropolis-Hastings comme suit :
 
 \begin{equation*}
   \alpha(y_{t+1},x_t) = \text{min}(1,\frac{cp_X(y_{t+1})}{cp_X(x_t)}\frac{q(x_t|y_{t+1})}{q(y_{t+1}|x_t)})
 \end{equation*}
 
-On peut denoter deux cas en renomant le deuxième membre du min en $\delta$ : 
+Nous pouvons dénoter deux cas en renommant le deuxième membre du min en $\delta$ : 
 
 \begin{itemize}
-  \item $\delta < 1$ : On obtient 
+  \item $\delta < 1$ : Nous obtenons 
   \begin{equation*}
     \alpha(y_{t+1},x_t) = \delta
   \end{equation*}
   \begin{equation*}
     \alpha(x_t,y_{t+1}) = \text{min}(1,\frac{1}{\delta}) = 1
   \end{equation*}
-  \item $\delta > 1$ : On obtient
+  \item $\delta > 1$ : Nous obtenons
   \begin{equation*}
     \alpha(y_{t+1},x_t) = 1
   \end{equation*}
@@ -64,13 +64,13 @@ On peut denoter deux cas en renomant le deuxième membre du min en $\delta$ :
   \end{equation*}
 \end{itemize}
 
-Peu importe le cas dans lequel on se trouve, on peut réécrire :
+Peu importe le cas dans lequel nous nous trouvons, nous pouvons réécrire :
 \begin{equation*}
   p_X(x_t)\alpha(y_{t+1},x_t)q(y_{t+1}|x_t) = p_X(y_{t+1})\alpha(x_t,y_{t+1})q(x_t|y_{t+1})
 \end{equation*}
 
-On sait que $q(y_{t+1}|x_t)$ est la probabilité de générer $y$ à l'instant $t+1$ selon la loi instrumentale $q$ sachant que l'on se trouve en $x$ à l'instant $t$. On sait 
-également que notre probabilité d'acceptation du nouvel élément est $\alpha$. On sait donc que :
+Nous savons que $q(y_{t+1}|x_t)$ est la probabilité de générer $y$ à l'instant $t+1$ selon la loi instrumentale $q$ sachant que nous nous trouvons en $x$ à l'instant $t$. Nous savons 
+également que notre probabilité d'acceptation du nouvel élément est $\alpha$. Nous savons donc que :
 
 \begin{equation*}
   \alpha(y_{t+1},x_t)q(y_{t+1}|x_t) = Q(x_t,y_{t+1})

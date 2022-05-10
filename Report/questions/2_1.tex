@@ -18,7 +18,7 @@ Ensuite, pour la probabilité conditionnelle $\mathbb{P}(G|x)$:
     \mathbb{P}(G|x) &= \prod_{1 \leq u < v \leq n} W_{x_u,x_v}^{G_{u,v}} (1-W_{x_u,x_v})^{1-G_{u,v}}\\ 
                     &= \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x,G)} (1-W_{i,j})^{N_{i,j}^c(x,G)}
 \end{align*}
-Et pour finir, grâce à la lois des probabilités totales, nous pouvons transformer $\mathbb{P}(G)$: 
+Et pour finir, grâce à la loi des probabilités totales, nous pouvons transformer $\mathbb{P}(G)$: 
 \begin{equation*}
     \mathbb{P}(G) = \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x
 \end{equation*}
@@ -34,21 +34,21 @@ où:
                    &= \frac{|\Omega_i(x)|*(|\Omega_i(x)|-1)}{2} - N_{i,i}(x,G) \text{  si }i = j
 \end{align*}
 \paragraph*{}
-Dans le cas d'une distribution $SBM(N,K,p,A,B)$, la probabilité $\mathbb{P}(x|G)$ sera simplifiée.
+Dans le cas d'une distribution $\text{SBM}(N,K,p,A,B)$, la probabilité $\mathbb{P}(x|G)$ sera simplifiée.
 \begin{align*}
     \mathbb{P}(G|x) &= \prod_{1 \leq i \leq j \leq k} A^{N_{i,i}(x,G)} (1-A)^{N_{i,i}^c(x,G)}\text{ si }i=j\\
                     &= \prod_{1 \leq i \leq j \leq k} B^{N_{i,j}(x,G)} (1-B)^{N_{i,j}^c(x,G)}\text{ si }i \ne j
 \end{align*}
 \subsubsection{}
 \paragraph*{}
-Le terme qui va devenir un problème si N augmente, est le dénominateur de la fraction finale du point précédent. En effet, la complexité du calcul de l'intégral
-est exponentielle par rapport à N. Cependant, il n'est pas nécéssaire de connaitre ce terme car nous souhaitons maximiser $\mathbb{P}(x|G)$ et l'intégrale se 
+Le terme qui va devenir un problème si N augmente, est le dénominateur de la fraction finale du point précédent. En effet, la complexité du calcul de l'intégrale
+est exponentielle par rapport à N. Cependant, il n'est pas nécéssaire de connaître ce terme car nous souhaitons maximiser $\mathbb{P}(x|G)$ et l'intégrale se 
 simplifiera lors du calcul du taux d'acceptation $\alpha$ car elle est indépendante du vecteur $x$ et donc constante au cours des itérations de l'algorithme de 
 Metropolis-Hastings.
 \subsubsection{}
 Pour que Metropolis-Hastings fonctionne au mieux, il faut que la chaine de Markov générée par celui-ci soit ergodique, c'est-à-dire que tout état soit atteignable depuis n'importe quel autre état,
 en un nombre fini de pas. (graphe connexe et irréductible) \\
-Ici, dans notre distribution $q_{s}$, on vient modifier au hasard une composante à la fois du graphe ce qui nous assure de couvrir toutes les possibilités/états et qui nous assure donc une chaine de Markov ergodique.
+Ici, dans notre distribution $q_{s}$, nous venons modifier au hasard une composante à la fois du graphe ce qui nous assure de couvrir toutes les possibilités/états et qui nous assure donc une chaine de Markov ergodique.
 \subsubsection{}
 Pour la section qui suit, nous considérons que $\mathbb{P}(x_t|G)<\mathbb{P}(x_{t-1}|G)$, si cette inégalité n'est pas respectée, nous considérerons $\alpha = 1$.\\
 Voici donc l'expression développée de $\alpha$

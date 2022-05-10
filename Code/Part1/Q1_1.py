@@ -37,7 +37,7 @@ plt.title("Évolution de la probabilité de $P(X_t = x)$ dans un cas de base uni
 plt.legend(["$P(X_t = 1)$", "$P(X_t = 2)$", "$P(X_t = 3)$", "$P(X_t = 4)$"])
 plt.xlabel("$t$")
 plt.ylabel("Probability")
-plt.savefig("Report/figs/evo_unif.png")
+# plt.savefig("Report/figs/evo_unif.png")
 # plt.show()
 
 plt.figure()
@@ -49,7 +49,7 @@ plt.title("Évolution de la probabilité de $P(X_t = x)$ dans un cas de base fix
 plt.legend(["$P(X_t = 1)$", "$P(X_t = 2)$", "$P(X_t = 3)$", "$P(X_t = 4)$"])
 plt.xlabel("$t$")
 plt.ylabel("Probability")
-plt.savefig("Report/figs/evo_fixed.png")
+# plt.savefig("Report/figs/evo_fixed.png")
 # plt.show()
 
 print("\nUniformly distributed case :")

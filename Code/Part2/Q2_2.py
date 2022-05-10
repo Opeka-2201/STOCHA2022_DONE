@@ -202,8 +202,8 @@ def graphB_A():
     plt.title("Evolution de la concordance en fonction du rapport b/a")
     plt.xlabel("b/a")
     plt.ylabel("Concordance")
-    plt.savefig("Report/figs/concordance_a_b.png")
-    plt.show()
+    # plt.savefig("Report/figs/concordance_a_b.png")
+    # plt.show()
 
 
 def graphCommunity():
@@ -232,7 +232,7 @@ def graphCommunity():
     plt.title("Evolution des des liens entre communeautés en fonction du rapport b/a")
     plt.xlabel("b/a")
     plt.ylabel("$N_{ij}$")
-    plt.savefig("Report/figs/nij.png")
-    plt.show()
+    # plt.savefig("Report/figs/nij.png")
+    # plt.show()
 
 graphCommunity()
