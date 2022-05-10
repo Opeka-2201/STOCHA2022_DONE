@@ -53,10 +53,10 @@ Le taux d'acceptation $\alpha$ peut être exprimé:
 \end{align*}
 Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calculer son logarithme. 
 \begin{align*}
-    \log (\mathbb{P}(x|G)) &= \sum_{i=1}^k|\Omega_i(x)|\log(p_i) + \sum_{1\leq i \leq j \ leq k} N_{i,j}(x,G) \log(W_{i,j})+N_{i,j}^c(x,G)\log(1-W_{i,j})\\
+    \log (\mathbb{P}(x|G)) &= \sum_{i=1}^k|\Omega_i(x)|\log(p_i) + \sum_{1\leq i \leq j \leq k} N_{i,j}(x,G) \log(W_{i,j})+N_{i,j}^c(x,G)\log(1-W_{i,j})\\
     \log\alpha =& \log (\mathbb{P}(x_t|G)) - \log (\mathbb{P}(x_{t-1}|G))\\
-               =& \sum_{i=1}^k|\Omega_i(x_t)|\log(p_i) + \sum_{1\leq i \leq j \ leq k} N_{i,j}(x_t,G) \log(W_{i,j})+N_{i,j}^c(x_t,G)\log(1-W_{i,j})\\
-               &- \sum_{i=1}^k|\Omega_i(x_{t-1})|\log(p_i) - \sum_{1\leq i \leq j \ leq k} N_{i,j}(x{t-1},G) \log(W_{i,j})+N_{i,j}^c(x{t-1},G)\log(1-W_{i,j})\\
-               =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \ leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
-               &+ \sum_{1\leq i \leq j \ leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
+               =& \sum_{i=1}^k|\Omega_i(x_t)|\log(p_i) + \sum_{1\leq i \leq j \leq k} N_{i,j}(x_t,G) \log(W_{i,j})+N_{i,j}^c(x_t,G)\log(1-W_{i,j})\\
+               &- \sum_{i=1}^k|\Omega_i(x_{t-1})|\log(p_i) - \sum_{1\leq i \leq j \leq k} N_{i,j}(x{t-1},G) \log(W_{i,j})+N_{i,j}^c(x{t-1},G)\log(1-W_{i,j})\\
+               =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
+               &+ \sum_{1\leq i \leq j \leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
 \end{align*}
