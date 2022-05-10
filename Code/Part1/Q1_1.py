@@ -65,7 +65,7 @@ print(" P(X_t = 3) = %s" % (P_2[2, time_limit-1]))
 print(" P(X_t = 4) = %s" % (P_2[3, time_limit-1]))
 
 print("\nQ^t =")
-Q_inf = np.linalg.matrix_power(Q, time_limit)
+Q_inf = np.linalg.matrix_power(Q,2)
 print(Q_inf)
 
 
@@ -91,16 +91,16 @@ def nextState(p):
 
 def makeRealisation(x0, T):
     real = list()
-    real.append(x0)
+    real.append(x0) #appends initial condition to the realisation
     for _ in range(1, T):
-        real.append(nextState(Q[real[-1]-1]))
+        real.append(nextState(Q[real[-1]-1])) # appends T steps to the realisation
     return real
 
 def numberOfOccurences(real):
     occurence = np.zeros(4)
     for i in real:
         occurence[i - 1] += 1
-    return occurence / len(real)
+    return occurence / len(real) # calculates the frequency of each state
 
 for nb_real in [100,1000,1000,10000,100000]:
   mk = makeRealisation(nextState([0.25,0.25,0.25,0.25]),nb_real)

@@ -75,6 +75,7 @@ def mhAll(x_start):
 x_start = 0
 
 # ----- MOYENNE
+plt.figure()
 results = mhAll(x_start)
 r = 0.1
 plt.plot(results[1])
@@ -85,10 +86,11 @@ plt.plot(results[1], color = 'orange')
 
 plt.legend(['r = 0.1', 'r = 0.5'])
 plt.title('Convergence de la moyenne en fonction de r')
-plt.show()
 # plt.savefig('Report/figs/convergence_mean.png')
+# plt.show()
 
 #  -----  VARIANCE
+plt.figure()
 tolerance = 2000
 results = mhAll(x_start)
 r = 0.1
@@ -100,15 +102,31 @@ plt.plot(results[2], color = 'orange')
 
 plt.legend(['r = 0.1', 'r = 0.5'])
 plt.title('Convergence de la variance en fonction de r')
-plt.show()
 # plt.savefig('Report/figs/convergence_var.png')
+# plt.show()
 
-# ----- HISTO
+# ----- HISTO1
+plt.figure()
+r = 0.1
+results = mhAll(x_start)
 labels, counts = np.unique(results[0], return_counts=True)
 plt.bar(labels, np.divide(counts,tolerance), align='center')
 plt.gca().set_xticks(labels)
 plt.plot(binom(K,p).pmf(range(K+1)), color = 'orange')
 plt.title('Histogramme des réalisations')
-plt.legend(['Théorique','Pratique'])
+plt.legend(['Théorique','Pratique $r=0.1$'])
+plt.savefig('Report/figs/histo1.png')
 plt.show()
-# plt.savefig('Report/figs/histo.png')
+
+# ----- HISTO2
+plt.figure()
+r = 0.5
+results = mhAll(x_start)
+labels, counts = np.unique(results[0], return_counts=True)
+plt.bar(labels, np.divide(counts,tolerance), align='center')
+plt.gca().set_xticks(labels)
+plt.plot(binom(K,p).pmf(range(K+1)), color = 'orange')
+plt.title('Histogramme des réalisations')
+plt.legend(['Théorique','Pratique $r=0.5$'])
+plt.savefig('Report/figs/histo2.png')
+plt.show()
