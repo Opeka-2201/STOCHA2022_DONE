@@ -1,40 +1,49 @@
-\subsubsection*{}
-\paragraph*{Notre implémentation}
+\subsubsection*{Notre implémentation}
+\paragraph*{}
 Pour implémenter l'algorithme de Metropolis-Hastings, nous avons décider de 
 procéder étape par étape et cela se reflète bien dans nos fonctions. Chaque 
-fonction a été une étape dans notre compréhension du problème. \\
+fonction a été une étape dans notre compréhension du problème. 
+\\\\
 Nous avons d'abord créé un générateur de distribution SBM pour bien comprendre les 
 rouages de cette distribution. Ensuite, nous avons cherché un moyen de calculer
 la probabilité $\mathbb{P}(G)$ avant de nous rendre compte que cela nous serait inutile 
-pour notre implémentation. Lorsque nous avons compris ça, nous avons pu avancer.\\
+pour notre implémentation. Lorsque nous avons compris ça, nous avons pu avancer.
+\\\\
 Nous avons poursuivi avec la fonction \textbf{computePX}. Lorsque nous avons simplifié au maximum 
 notre problème pour une distribution SBM symétrique, nous nous sommes encore rendu compte
 que cette partie était aussi inutile car ce terme reste constant dans notre cas et ne change 
-donc rien a la maximisation de $\mathbb{P}(x|G)$. \\
+donc rien a la maximisation de $\mathbb{P}(x|G)$. 
+\\\\
 Nous avons donc abordé le dernier morceau qui était en fait le seul utile et 
-nous avons rencontrer pas mal de problèmes d'abord du à de simples erreurs de code. \\
+nous avons rencontrer pas mal de problèmes d'abord du à de simples erreurs de code. 
+\\\\
 Une fois tous ces soucis réglés, nous avions un algorithme fonctionnel mais 
 très loin d'être efficace. Nous avons donc fait des analyses temporelles pour trouver la partie 
 de notre code qui prenait le plus de temps, c'était la fonction \textbf{computeN}. Nous avons compris
 à ce moment la que recalculer à chaque fois tous les éléments $N_{i,j}(x,G)$ n'était pas la bonne 
-solution. \\
+solution. 
+\\\\
 Nous avons alors implémenté une mise à jour de la variable $N$ à partir de celle du pas
 précédent. Il nous a ensuite paru logique d'étendre cette méthode à la variable $Om$. Vous pouvez 
 trouver nos étapes de mise à jour des variables dans la fonction \textbf{nextY}. Quand nous avons
 passé cette étape, le code à tout de suite été beaucoup plus efficace au point que nous avons doublé
-le nombre d'itérations pour atteindre 1.000.000 et cela nous a pris moins de temps que pour la  version précédente.\\
+le nombre d'itérations pour atteindre 1.000.000 et cela nous a pris moins de temps que pour la  version précédente.
+\\\\
 Par après, nous nous sommes demandé comment 
 éviter de tomber dans un minimum local et nous avons pensé que faire plusieurs tests en prenant 
 différents vecteurs initiaux aléatoires permettrait de prendre en compte la possibilité d'un minimum local.
-L'arguments nbTests de notre fonction \textbf{mhALL} est la concrétisation de cette idée.\\
+L'arguments nbTests de notre fonction \textbf{mhALL} est la concrétisation de cette idée.
+\\\\
 Nous avons alors lancé le test sur le graphe proposé pour le challenge et nous avons obtenus un très 
 bon résultat! ($\log(\mathbb{P}(G|x)\mathbb{P}(x)) = -1295577$)
 \subsubsection*{Amélioration possible}
 \paragraph*{}
 Au fil des séances et des heures passées sur ce projet, nous avons compris que nous ne pourrions jamais 
-atteindre un résultat parfait et cela pour plusieurs raisons. \\
+atteindre un résultat parfait et cela pour plusieurs raisons. 
+\\\\
 Premièrement, nous avons des données réelles à analyser. Ces données ne peuvent pas correspondre exactement
-à une distribution théorique. \\
+à une distribution théorique. 
+\\\\
 Ensuite, nous utilisons une distribution symétrique. En effet, nous avons considéré que la distribution
 était uniforme ($p_i = p_j ,\forall i,j \in[1,k]$) et avons posé $W_{i,i}=A$ et $W_{i,j},\forall i,j \in [1,k] ,i \ne j$.
 Nous savons cependant que $A = \frac{W_{1,1}+W_{2,2}}{2}$ alors que en pratique, les valeurs sur la diagonale de $W$

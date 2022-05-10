@@ -50,19 +50,24 @@ Pour que Metropolis-Hastings fonctionne au mieux, il faut que la chaine de Marko
 en un nombre fini de pas. (graphe connexe et irréductible) \\
 Ici, dans notre distribution $q_{s}$, on vient modifier au hasard une composante à la fois du graphe ce qui nous assure de couvrir toutes les possibilités/états et qui nous assure donc une chaine de Markov ergodique.
 \subsubsection{}
-Le taux d'acceptation $\alpha$ peut être exprimé:
+Pour la section qui suit, nous considérons que $\mathbb{P}(x_t|G)<\mathbb{P}(x_{t-1}|G)$, si cette inégalité n'est pas respectée, nous considérerons $\alpha = 1$.\\
+Voici donc l'expression développée de $\alpha$
 \begin{align*}
     \alpha &= \frac{\mathbb{P}(x_t|G)}{\mathbb{P}(x_{t-1}|G)} \\
            &=\frac{\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_t)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{ij}(x_t,G)} (1-W_{i,j})^{N_{i,j}^c(x_t,G)}}{ \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x}}{\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_{t-1})|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x_{t-1},G)} (1-W_{i,j})^{N_{i,j}^c(x_{t-1},G)}}{ \int\mathbb{P}(G|x) \, \mathrm{d}x}}\\
            &=\frac{\prod_{i=1}^n p_i^{|\Omega_i(x_t)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{ij}(x_t,G)} (1-W_{i,j})^{N_{i,j}^c(x_t,G)}}{\prod_{i=1}^n p_i^{|\Omega_i(x_{t-1})|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x_{t-1},G)} (1-W_{i,j})^{N_{i,j}^c(x_{t-1},G)}}
 \end{align*}
-Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calculer son logarithme. 
+Comme le taux $\alpha$ sera calculé numériquement, il est intéressant de calculer son logarithme. Comme nous obtiendrons des $\mathbb{P}(x|G)$ qui seront 
+des très petits nombres, le logarithme va nous permettre de ne pas aller en dessous de l'Epsilon machine.
 \begin{align*}
     \log (\mathbb{P}(x|G)) &= \sum_{i=1}^k|\Omega_i(x)|\log(p_i) + \sum_{1\leq i \leq j \leq k} N_{i,j}(x,G) \log(W_{i,j})+N_{i,j}^c(x,G)\log(1-W_{i,j})\\
     \log\alpha =& \log (\mathbb{P}(x_t|G)) - \log (\mathbb{P}(x_{t-1}|G))\\
                =& \sum_{i=1}^k|\Omega_i(x_t)|\log(p_i) + \sum_{1\leq i \leq j \leq k} N_{i,j}(x_t,G) \log(W_{i,j})+N_{i,j}^c(x_t,G)\log(1-W_{i,j})\\
-               &- \sum_{i=1}^k|\Omega_i(x_{t-1})|\log(p_i) - \sum_{1\leq i \leq j \leq k} N_{i,j}(x{t-1},G) \log(W_{i,j})+N_{i,j}^c(x{t-1},G)\log(1-W_{i,j})\\
-               =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
+               &- \sum_{i=1}^k|\Omega_i(x_{t-1})|\log(p_i) - \sum_{1\leq i \leq j \leq k} N_{i,j}(x{t-1},G) \log(W_{i,j})+N_{i,j}^c(x{t-1},G)\log(1-W_{i,j})
+\end{align*}
+En mettant en évidence tous les termes qui peuvent l'être, nous obtenons :
+\begin{align*}
+    \log\alpha =& \sum_{i=1}^k(|\Omega_i(x_t)|-|\Omega_i(x_{t-1}))\log(p_i) +\sum_{1\leq i \leq j \leq k} (N_{i,j}(x_t,G)-N_{i,i}(x{t-1},G)) \log(W_{i,j})\\
                &+ \sum_{1\leq i \leq j \leq k}(N_{i,j}^c(x_t,G)-N_{i,j}^c(x_{t-1},G))\log(1-W_{i,j})
 \end{align*}
 Ce calcul peut encore être simplifié en mettant à jour les nombres $N_{i,j}(x,G)$, $N_{i,j}^c(x,G)$ et $\Omega_i(x)$ à partir des itérations précédentes. \\
