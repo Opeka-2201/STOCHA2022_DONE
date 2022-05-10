@@ -4,14 +4,23 @@ Les graphiques qui vont suivre ont été généré avec une distribution
  $SBM(500,2,[0.5,0.5],a/500,b/500)$
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{figs/concordance_a_b.png}
+    \includegraphics[width=0.6\textwidth]{figs/concordance_a_b.png}
     \caption{Evolution de la concordance en fonction du rapport $b/a$}
 \end{figure}
+\paragraph*{}
+Ce graphique montre bien que dès que le rapport $b/a$ augmente, la concordance diminue
+rapidement et tend vers $0.5$ lorque $b/a$ tend vers $1$. C'est un résultat prévisible
+car plus le rapport est grand, moins il y a de communeautés de distinctes. 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{figs/nij.png}
+    \includegraphics[width=0.6\textwidth]{figs/nij.png}
     \caption{Evolution de la concordance en fonction du rapport $b/a$}
 \end{figure}
+\paragraph*{}
+Ce graphique nous aide a comprendre plus visuellement ce que change le rapport 
+$b/a$. On remarque que plus le rapport est grand, plus il y a de liens entre les 
+communautés. Quand $b/a = 0.5$, il y a autant de liens entre communautés que à 
+l'intérieur des communautés. 
 
 \paragraph*{}
 En comparant les 2 graphiques, on remarque rapidement que moins les communeautes

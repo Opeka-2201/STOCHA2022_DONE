@@ -36,8 +36,39 @@ On sait également que au vu de la forme de $\pi_0$ et $Q$ vue plus haut et que 
   P(X_1=x_j) &= \sum_{k=1}^n P(X_1=x_k,X_0=x_j) = P(X_0=x_j)
 \end{align*}
 
-On vérifie cela pour chaque $j$, ce qui montre que $\pi_0 = \pi_1$ et que $\pi_0$ est une distribution stationnaire. 
+On vérifie cela pour chaque $j$, ce qui montre que $\pi_0 = \pi_1$ et que $\pi_0$ est une distribution stationnaire. Cette distribution est unique si la chaîne de Markov induite par la matrice de transition $Q$ est irréductible. 
 
 \subsubsection{}
+En remplaçant $p_X$ par $f(x) = cp_X$, on recalcule la probabilté d'acceptation de l'algorithme de Metropolis-Hastings comme suit :
 
+\begin{equation*}
+  \alpha(y_{t+1},x_t) = \text{min}(1,\frac{cp_X(y_{t+1})}{cp_X(x_t)}\frac{q(x_t|y_{t+1})}{q(y_{t+1}|x_t)})
+\end{equation*}
 
+On peut denoter deux cas en renomant le deuxième membre du min en $\delta$ : 
+
+\begin{itemize}
+  \item $\delta < 1$ : On obtient 
+  \begin{equation*}
+    \alpha(y_{t+1},x_t) = \delta\\
+    \alpha(x_t,y_{t+1}) = \text{min}(1,\frac{1}{\delta}) = 1
+  \end{equation*}
+  \item $\delta > 1$ : On obtient
+  \begin{equation*}
+    \alpha(y_{t+1},x_t) = 1\\
+    \alpha(x_t,y_{t+1}) = \delta
+  \end{equation*}
+\end{itemize}
+
+Peu importe le cas dans lequel on se trouve, on peut réécrire :
+\begin{equation*}
+  p_X(x_t)\alpha(y_{t+1},x_t)q(y_{t+1}|x_t) = p_X(y_{t+1})\alpha(x_t,y_{t+1})q(x_t|y_{t+1})
+\end{equation*}
+
+On sait que $q(y_{t+1}|x_t)$ 
+
+\begin{equation*}
+  p_X(x_t)Q(x_t,y_{t+1}) = p_X(y_{t+1})Q(y_{t+1},x_t)
+\end{equation*}
+
+Cette dernière équation est l'équation de balance détaillée et est vérifiée par notre chaîne de Markov.

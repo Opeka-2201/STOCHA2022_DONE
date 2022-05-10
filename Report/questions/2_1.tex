@@ -8,19 +8,21 @@ Dans le cadre de ce projet, nous obtenons :
 \begin{equation*}
     \mathbb{P}(x|G) = \frac{\mathbb{P}(G|x)*\mathbb{P}(x)}{\mathbb{P}(G)}
 \end{equation*}
-Regardons maintenant de plus près les 3 termes de notre équation:
+Regardons maintenant de plus près les 3 termes de notre équation, commençons par $\mathbb{P}(x)$:
 \begin{align*}
     \mathbb{P}(x) &= \prod_{u=1}^n p_{x_u} \\ 
                   &= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
 \end{align*}
+Ensuite, pour la probabilité conditionnelle $\mathbb{P}(G|x)$:
 \begin{align*}
     \mathbb{P}(G|x) &= \prod_{1 \leq u < v \leq n} W_{x_u,x_v}^{G_{u,v}} (1-W_{x_u,x_v})^{1-G_{u,v}}\\ 
                     &= \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x,G)} (1-W_{i,j})^{N_{i,j}^c(x,G)}
 \end{align*}
+Et pour finir, grâce à la lois des probabilités totales, nous pouvons transformer $\mathbb{P}(G)$: 
 \begin{equation*}
     \mathbb{P}(G) = \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x
 \end{equation*}
-Nous avons donc au final:
+En recombinant ces résultats, nous pouvons exprimer $\mathbb{P}(x|G)$:
 \begin{equation*}
     \mathbb{P}(x|G) = \frac{\prod_{i=1}^n p_i^{|\Omega_i(x)|} \prod_{1 \leq i \leq j \leq k} W_{i,j}^{N_{i,j}(x,G)} (1-W_{i,j})^{N_{i,j}^c(x,G)}}{ \int\mathbb{P}(G|x) \, \mathrm{d}x}
 \end{equation*}
