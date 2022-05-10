@@ -1,4 +1,31 @@
-\subsubsection{}
+\subsubsection{Théorème de bayes, cas général}
+\paragraph{}
+Pour commencer, rappelons nous le théorème de Bayes dans sa forme général:
+\begin{equation*}
+    \mathbb{P}(x|y) = \frac{\mathbb{P}(y|x)*\mathbb{P}(x)}{\mathbb{P}(y)}
+\end{equation*}
+Dans le cadre de ce projet, nous obtenons :
+\begin{equation*}
+    \mathbb{P}(x|G) = \frac{\mathbb{P}(G|x)*\mathbb{P}(x)}{\mathbb{P}(G)}
+\end{equation*}
+Si on pose :
+\begin{equation*}
+    Z = \mathbb{P}(G) = \int_{}^{} \mathbb{P}(G|x) \, \mathrm{d}x
+\end{equation*}
+Z est constant car $G$ ne changera pas.\\
+Nous pouvons simplifier la première équation en :
+\begin{equation*}
+    \mathbb{P}(x|G) = \frac{1}{Z}\mathbb{P}(G|x)*\mathbb{P}(x)
+\end{equation*}
+Regardons maintenant de plus près les 2 autres termes de notre équation:
+\begin{aligned}
+    \mathbb{P}(x) $= \prod_{u=1}^n p_{x_u} \\ 
+                  $= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
+\end{align*}
+\begin{aligned}
+    \mathbb{P}(G|x) $= \prod_{1 \leq u < v \leq n} W_{x_u,x_v}^{u_{uv}} \\ 
+                  $= \prod_{i=1}^n p_i^{|\Omega_i(x)|}
+\end{align*}
 \subsubsection{}
 \subsubsection{}
 \subsubsection{}

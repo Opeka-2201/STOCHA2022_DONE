@@ -21,7 +21,7 @@ Nous calculons donc pour des valeurs de $t$ croissantes les différentes valeurs
   \end{pmatrix}$ avec $x = 1, 2, 3, 4$
   \item $Q^t = 
   \begin{pmatrix}
-  0.3488 & 0.0698 & 0.2325 & 0.3488\\
+  0.3488 & 0.0698 & 0.2326 & 0.3488\\
   0.3488 & 0.0698 & 0.2326 & 0.3488\\
   0.3488 & 0.0698 & 0.2326 & 0.3488\\
   0.3488 & 0.0698 & 0.2326 & 0.3488\\
@@ -40,6 +40,28 @@ On remarque donc bien une convergence vers des probabilités et ceci peut import
   \includegraphics[width=0.5\textwidth]{figs/evo_fixed.png}
   \caption{Évolution des probabilités dans une distribution de départ fixée sur 3}
 \end{figure}
+
+On remarque qu'après une vingtaine d'itérations on obtient la relation suivante :
+
+\begin{equation*}
+  Q^t = Q^{t-1}
+\end{equation*}
+
+On en déduit donc que $\lim_{t \rightarrow \infty} Q^t \approx Q^20 $, en effet chaque ligne de $Q^t$ est égale à $[0.3488 , 0.0698 , 0.2326 , 0.3488]$. On a déjà remarqué dans les deux premières figures que peut importe le 
+point de départ, on converge vers les mêmes probabilités après un nombre suffisant d'itérations on montre alors avec $\pi_{t,\text{uniforme}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
+distribution de base uniforme et $\pi_{t,\text{fixé}}$ représentant la distribution des probabilités au pas de temps $t$ dans le cas d'une 
+distribution de base fixée sur le cas $3$ :  
+
+\begin{align*}
+  \pi_{21,\text{uniforme}} &= \pi_{20,\text{uniforme}} Q = \pi_{20,\text{uniforme}}
+  \pi_{21,\text{fixé}} &= \pi_{20,\text{fixé}} Q = \pi_{20,\text{fixé}} 
+\end{align*}
+
+On dit d'une distribution qu'elle est stationnaire si $\pi_t = \pi_t Q$, nous considérons donc nos deux distributions comme stationnaires et elles admettent les propriétés suivantes :
+\begin{itemize}
+  \item Ergodicité si elle est égale aux lignes de $\lim_{t \rightarrow \infty} Q^t$, comme prouvé dans la sous-section \textbf{1.1.4}.
+  \item Unicité si la châine de Markov est irréductible.
+\end{itemize}
 
 \subsubsection{}
 
@@ -79,5 +101,9 @@ plus haut que ça n'avait pas d'influence.
 En comparant ce tableau avec les résultats obtenus avec les valeurs précédement obtenus, on remarque bien que les proportions sont respectées et font sens, on converge bien 
 vers les mêmes valeurs.
 
+Pour montrer plus de détails, on montre qu'on approche bien des valeurs des lignes de $\lim_{t \rightarrow \infty} Q^t$ avec des fluctuations qui s'atténuent plus $t$ augmente :
+
+%% Inclure les figures que je vais faire mtn
+
 \subsubsection{}
-/!$\backslash$ TODO /!$\backslash$
+Après ces premières expériences sur les chaînes de Markov, nous pouvons conclure que 

@@ -86,7 +86,7 @@ plt.plot(results[1], color = 'orange')
 plt.legend(['r = 0.1', 'r = 0.5'])
 plt.title('Convergence de la moyenne en fonction de r')
 plt.show()
-# plt.savefig('/Users/arthurlouis/Documents/ULiège/Bachelier/Bloc 3/Q2/Processus Stochastiques/STOCHA2022/Rapport/figs/convergence_mean.png')
+# plt.savefig('Report/figs/convergence_mean.png')
 
 #  -----  VARIANCE
 tolerance = 2000
@@ -101,7 +101,7 @@ plt.plot(results[2], color = 'orange')
 plt.legend(['r = 0.1', 'r = 0.5'])
 plt.title('Convergence de la variance en fonction de r')
 plt.show()
-# plt.savefig('/Users/arthurlouis/Documents/ULiège/Bachelier/Bloc 3/Q2/Processus Stochastiques/STOCHA2022/Rapport/figs/convergence_var.png')
+# plt.savefig('Report/figs/convergence_var.png')
 
 # ----- HISTO
 labels, counts = np.unique(results[0], return_counts=True)
@@ -111,4 +111,4 @@ plt.plot(binom(K,p).pmf(range(K+1)), color = 'orange')
 plt.title('Histogramme des réalisations')
 plt.legend(['Théorique','Pratique'])
 plt.show()
-# plt.savefig('/Users/arthurlouis/Documents/ULiège/Bachelier/Bloc 3/Q2/Processus Stochastiques/STOCHA2022/Rapport/figs/histo.png')
+# plt.savefig('Report/figs/histo.png')
